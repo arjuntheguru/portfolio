@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Arjun Subedi</title>
+    <link>https://arjunsubedi.me/tags/</link>
+    <description>Recent content in Tags on Arjun Subedi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://arjunsubedi.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI</title>
+      <link>https://arjunsubedi.me/tags/ai/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AWS</title>
+      <link>https://arjunsubedi.me/tags/aws/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Certification</title>
+      <link>https://arjunsubedi.me/tags/certification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/certification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Compression</title>
+      <link>https://arjunsubedi.me/tags/data-compression/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/data-compression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Developer</title>
+      <link>https://arjunsubedi.me/tags/developer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/developer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Developer Associate</title>
+      <link>https://arjunsubedi.me/tags/developer-associate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/developer-associate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DL</title>
+      <link>https://arjunsubedi.me/tags/dl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/dl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DVA</title>
+      <link>https://arjunsubedi.me/tags/dva/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/dva/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Integration</title>
+      <link>https://arjunsubedi.me/tags/integration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/integration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ML</title>
+      <link>https://arjunsubedi.me/tags/ml/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/ml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Node.JS</title>
+      <link>https://arjunsubedi.me/tags/node.js/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PCA</title>
+      <link>https://arjunsubedi.me/tags/pca/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/pca/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://arjunsubedi.me/tags/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PyTorch</title>
+      <link>https://arjunsubedi.me/tags/pytorch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/pytorch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>REST API</title>
+      <link>https://arjunsubedi.me/tags/rest-api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/rest-api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SAA</title>
+      <link>https://arjunsubedi.me/tags/saa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/saa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Solutions Architect</title>
+      <link>https://arjunsubedi.me/tags/solutions-architect/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/solutions-architect/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TypeScript</title>
+      <link>https://arjunsubedi.me/tags/typescript/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/typescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualization</title>
+      <link>https://arjunsubedi.me/tags/visualization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arjunsubedi.me/tags/visualization/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
