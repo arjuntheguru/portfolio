@@ -9,14 +9,14 @@ menu:
       name: Home
       url: /
       weight: 10
-    - identifier: experience
-      name: Experience
-      url: /experience
-      weight: 40
-    - identifier: search
-      name: Search
-      url: /search
-      weight: 50
+    # - identifier: experience
+    #   name: Experience
+    #   url: /experience
+    #   weight: 40
+    # - identifier: search
+    #   name: Search
+    #   url: /search
+    #   weight: 50
     # - identifier: tags
     #   name: Tags
     #   url: /tags
@@ -42,7 +42,7 @@ params:
     enabled: true
     title: "Arjun Subedi"
     subtitle: Hey there! 🚀 I'm a software engineer with a zest for designing and developing full-stack web applications using industry best practices. 
-          💡 Currently, I'm pursuing my [**MSc in Advanced Computer Science**](https://courses.aber.ac.uk/postgraduate/software-engineering-integrated-industrial-year/) from Aberystwyth University. I thrive on tackling complex challenges with innovative solutions, all while dancing to the beats of agile methodology 💃. When I'm not busy coding away, you might find me strumming some groovy tunes on my guitar 🎸 (I promise, I'm better at coding!).
+          💡 Currently, I'm working as a Software Eningeer at the BT Group. I thrive on tackling complex challenges with innovative solutions. When I'm not busy coding away, you might find me strumming some groovy tunes on my guitar 🎸 (I promise, I'm better at coding!).
     imageUrl: "home/formal-pic-small.jpg"
     imageWidth: 220
     imageHeight: 220
