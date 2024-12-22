@@ -1,11 +1,22 @@
-FROM alpine:latest
+# Stage 1: Build the Hugo site
+FROM alpine:latest as build  
 
 RUN apk add --no-cache hugo
 
 WORKDIR /site
 
-COPY . /site
+COPY . .
 
-EXPOSE 1313
+RUN hugo --minify
 
-CMD ["hugo", "server", "--bind=0.0.0.0", "--port=1313", "--disableFastRender"]
+# Stage 2: Serve with Nginx
+FROM nginx:1.25-alpine
+
+# Set workdir to the NGINX default dir.
+WORKDIR /usr/share/nginx/html
+
+# Fixed the source path to match your workdir
+COPY --from=build /site/public .  
+
+# Expose port 80
+EXPOSE 80/tcp
