@@ -1,4 +1,4 @@
-baseURL: "https://arjunsubedi.me"
+baseURL: "https://arjunsubedi.site"
 languageCode: en-us
 title: Arjun Subedi
 theme: PaperMod
@@ -43,7 +43,7 @@ params:
     title: "Arjun Subedi"
     subtitle: Hey there! 🚀 I'm a software engineer with a zest for designing and developing full-stack web applications using industry best practices. 
           💡 Currently, I'm working as a Software Eningeer at the BT Group. I thrive on tackling complex challenges with innovative solutions. When I'm not busy coding away, you might find me strumming some groovy tunes on my guitar 🎸 (I promise, I'm better at coding!).
-    imageUrl: "home/formal-pic-small.jpg"
+    imageUrl: "/home/formal-pic-small.jpg"
     imageWidth: 220
     imageHeight: 220
     # buttons:

@@ -1,0 +1,75 @@
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: personal-site
+
+---
+
+# Deployment for the webapp
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personal-site-deployment
+  namespace: personal-site
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: personal-site
+  template:
+    metadata:
+      labels:
+        app: personal-site
+    spec:
+      containers:
+      - name: portfolio
+        image: arjuntheguru/portfolio:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 1313
+
+---
+
+# Service for the webapp
+apiVersion: v1
+kind: Service
+metadata:
+  name: personal-site-service
+  namespace: personal-site
+spec:
+  selector:
+    app: personal-site
+  ports:
+    - protocol: TCP
+      port: 1313
+      targetPort: 80
+  type: ClusterIP
+
+---
+
+# Ingress Configuration
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: personal-site-ingress
+  namespace: personal-site
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+spec:
+  tls:
+  - hosts:
+    - arjunsubedi.site
+    secretName: arjunsubedi-site-tls
+  rules:
+  - host: arjunsubedi.site
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: personal-site-service
+            port:
+              number: 1313
