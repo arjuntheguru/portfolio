@@ -4,9 +4,3 @@ role: MSc, Advanced Computer Science
 where: Aberystwyth, Wales
 start: 2022-09
 end: 2024-09
-commit:
-  order: 4
-  parents: [19fa6c4] # branches off after Dailo
-  hash: 5c0d7aa
-  message: "branch: start MSc Advanced Computer Science"
-  lane: 1

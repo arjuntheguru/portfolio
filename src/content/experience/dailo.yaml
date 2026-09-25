@@ -9,8 +9,8 @@ highlights:
   - Defined operational specifications with stakeholders to keep requirements tied to business goals.
 tags: [.NET, C#, Clean Architecture, Team lead]
 commit:
-  order: 5
-  parents: [0a6d3be]
+  order: 3
+  parents: [3f81d07, 0a6d3be] # main (InfoKoNN), then the freelance branch
   hash: 19fa6c4
-  message: "feat: lead .NET backend at Dailo"
+  message: "merge: freelance → main · lead .NET backend"
   lane: 0

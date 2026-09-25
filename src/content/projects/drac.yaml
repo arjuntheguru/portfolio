@@ -2,4 +2,4 @@ name: DRAC 2.0
 url: https://drac.arjunsubedi.com
 order: 2
 summary: "My MSc project at Aberystwyth University: a rebuild of DRAC, the dose rate calculator used in luminescence dating. Layered ASP.NET MVC with CSV import, PDF reports and a MySQL database, tested with xUnit."
-tags: [.NET MVC, EF Core, MySQL, Tailwind CSS, CQRS, MediatR, FluentValidation, xUnit, Docker]
+tags: [.NET MVC, EF Core, MySQL, CQRS, MediatR, xUnit, Docker]

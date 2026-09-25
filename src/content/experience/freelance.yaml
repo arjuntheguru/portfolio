@@ -7,8 +7,10 @@ highlights:
   - Turned client business requirements into technical specifications, then built and shipped the applications.
 tags: [.NET Core, Full stack]
 commit:
-  order: 6
-  parents: [3f81d07]
+  order: 4
+  parents: [3f81d07] # branches off after InfoKoNN
   hash: 0a6d3be
   message: "feat: go freelance"
-  lane: 0
+  lane: 1
+  refs:
+    - { label: freelance, kind: branch }

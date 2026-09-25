@@ -7,8 +7,10 @@ highlights:
   - "Demonstrated for four undergraduate modules: object-oriented programming, web development, information security and foundation programming."
 tags: [Teaching]
 commit:
-  order: 3
-  parents: [5c0d7aa]
+  order: 2
+  parents: [19fa6c4] # branches off after Dailo
   hash: b2e8f10
   message: "teach: demonstrator, four CS modules"
   lane: 1
+  refs:
+    - { label: move/uk, kind: branch }

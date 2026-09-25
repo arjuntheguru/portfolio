@@ -8,7 +8,7 @@ highlights:
   - Designed and built full stack web applications with .NET MVC.
 tags: [.NET MVC, SQL]
 commit:
-  order: 7
+  order: 5
   hash: 3f81d07
   message: "init: first engineering role"
   lane: 0

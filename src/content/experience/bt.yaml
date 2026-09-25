@@ -1,7 +1,7 @@
 org: BT Group
 role: Software Engineer
 where: Belfast, Northern Ireland
-start: 2024-09
+start: 2023-09
 end: null
 highlights:
   - Designed and built Java microservices to TMF API specifications, running cloud-native on AWS.
@@ -11,9 +11,9 @@ highlights:
 tags: [Java, Spring Boot, AWS, Kafka, PostgreSQL, OpenTelemetry]
 commit:
   order: 1
-  parents: [19fa6c4, 7a3d9e1] # main (Dailo), then the MSc branch, whose last commit is the placement
+  parents: [19fa6c4, b2e8f10] # main (Dailo), then the uk branch (demonstrating in Aberystwyth)
   hash: e41c9b2
-  message: "merge: msc/aberystwyth → main · full-time"
+  message: "merge: move/uk → main · join BT"
   lane: 0
   refs:
     - { label: HEAD → main, kind: head }

@@ -15,10 +15,11 @@ export const profile = {
   offDuty: "guitar",
   certifications: ["Microsoft Certified: Azure Fundamentals"],
   skills: {
-    "Languages & frameworks": ["Java", "Spring Boot", "C#", ".NET", "EF Core", "ASP.NET MVC", "JavaScript", "SQL", "HTML/CSS"],
+    "Languages & frameworks": ["Java", "Spring Boot", "C#", ".NET", "EF Core", "ASP.NET MVC", "Python", "JavaScript", "SQL", "HTML/CSS"],
     "Cloud & infrastructure": ["AWS", "Docker", "Kubernetes", "Linux", "CI/CD", "Git"],
     "Data & messaging": ["PostgreSQL", "SQL Server", "MongoDB", "Redis", "Kafka", "RabbitMQ", "SignalR", "Database design"],
     "Architecture & practice": ["Microservices", "Clean Architecture", "CQRS", "Design patterns", "TDD", "OpenTelemetry"],
+    "Machine learning": ["LightGBM", "Gradient-boosted regression", "Feature engineering", "Backtesting"],
     "AI-assisted engineering": ["Kiro", "AI coding agents", "Context engineering"],
   } as Record<string, string[]>,
   // The system-info block shown when the terminal opens.
@@ -29,6 +30,7 @@ export const profile = {
     ["Cloud", "AWS (RDS, SQS, SNS), Docker, Kubernetes"],
     ["Messaging", "Kafka, RabbitMQ"],
     ["Tracing", "OpenTelemetry → Dynatrace"],
+    ["ML", "LightGBM regression (Transio)"],
     ["Education", "MSc Advanced CS, Aberystwyth"],
   ] as [string, string][],
 };
