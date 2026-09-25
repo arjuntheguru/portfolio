@@ -1,0 +1,51 @@
+# The portfolio site: nginx serving the Astro build (nginx/site.conf).
+# Names and labels match what is already running, so `kubectl apply` updates it in place.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personal-site-deployment
+  namespace: personal-site
+spec:
+  # Two pods, so a rollout or a single crash doesn't take the site down.
+  replicas: 2
+  # Keep only the last two rollouts' ReplicaSets around.
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: personal-site
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: personal-site
+    spec:
+      containers:
+        - name: portfolio
+          image: arjuntheguru/portfolio:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet: { path: /healthz, port: 80 }
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /healthz, port: 80 }
+            periodSeconds: 20
+          resources:
+            requests: { cpu: 10m, memory: 16Mi }
+            limits: { memory: 64Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: personal-site-service
+  namespace: personal-site
+spec:
+  selector:
+    app: personal-site
+  ports:
+    - port: 80
+      targetPort: 80

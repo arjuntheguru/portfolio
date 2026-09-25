@@ -1,0 +1,5 @@
+name: Transio
+url: https://transio.arjunsubedi.com
+order: 1
+summary: "Live public transport for Northern Ireland: vehicle tracking, timetables, disruptions, journey planning and arrival estimates. A Spring Boot backend feeds a Flutter app for mobile and web, running on Kubernetes."
+tags: [Java 21, Spring Boot, MySQL, Redis, WebSocket, OSRM, Flutter, Kubernetes, Prometheus, Grafana]

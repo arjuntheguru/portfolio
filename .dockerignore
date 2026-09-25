@@ -1,0 +1,8 @@
+node_modules
+dist
+.astro
+.git
+k8s
+scripts/portrait.jpg
+Dockerfile
+.dockerignore

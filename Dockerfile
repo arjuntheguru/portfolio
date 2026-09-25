@@ -1,24 +1,13 @@
-# Stage 1: Build the Hugo site
-FROM alpine:latest AS build
-
-RUN apk add --no-cache hugo git
-
-WORKDIR /site
-
-# Copy all source files
+# Build the static site
+FROM node:24-alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 COPY . .
+RUN npm run build
 
-# Remove empty theme folder and clone fresh
-RUN rm -rf themes/PaperMod && \
-    git clone --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
-
-RUN hugo --minify
-
-# Stage 2: Serve with Nginx
-FROM nginx:1.25-alpine
-
-WORKDIR /usr/share/nginx/html
-
-COPY --from=build /site/public .
-
-EXPOSE 80/tcp
+# Serve it with nginx
+FROM nginx:1.29-alpine
+COPY nginx/site.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80

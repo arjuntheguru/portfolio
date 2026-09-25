@@ -1,0 +1,47 @@
+# Cluster-wide fallback pages (tarampampam/error-pages, "ghost" template).
+# The MicroK8s ingress controller runs with
+#   --default-backend-service=personal-site/error-pages-svc
+# so this answers for EVERY site on the cluster when a request matches no ingress, and for
+# any ingress that sets custom-http-errors without its own default-backend. It is not part
+# of the portfolio: don't delete it when redeploying the site.
+#
+# Recorded from the live cluster on 2026-09-25, with one change: SEND_SAME_HTTP_CODE=true.
+# Without it the pages go out as HTTP 200, so a missing page looks like a real one.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: error-pages
+  namespace: personal-site
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: error-pages
+  template:
+    metadata:
+      labels:
+        app: error-pages
+    spec:
+      containers:
+        - name: error-pages
+          image: ghcr.io/tarampampam/error-pages:latest
+          imagePullPolicy: Always
+          env:
+            - name: TEMPLATE_NAME
+              value: ghost
+            - name: SEND_SAME_HTTP_CODE
+              value: "true"
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: error-pages-svc
+  namespace: personal-site
+spec:
+  selector:
+    app: error-pages
+  ports:
+    - port: 80
+      targetPort: 8080

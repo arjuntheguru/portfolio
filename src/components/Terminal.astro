@@ -1,0 +1,133 @@
+---
+// The developer terminal. Opens from the nav button, the ` key, or /#terminal.
+import type { CollectionEntry } from "astro:content";
+import { profile, monthsBetween, formatYM } from "../data/profile";
+
+interface Props {
+  experience: CollectionEntry<"experience">[];
+  projects: CollectionEntry<"projects">[];
+}
+const { experience, projects } = Astro.props;
+
+const data = {
+  profile,
+  work: experience
+    .filter((e) => e.data.kind === "work")
+    .sort((a, b) => b.data.start.localeCompare(a.data.start))
+    .map((e) => ({ id: e.id, ...e.data })),
+  education: experience.filter((e) => e.data.kind === "education").map((e) => e.data),
+  projects: projects.sort((a, b) => a.data.order - b.data.order).map((p) => p.data),
+};
+const uptimeMonths = (monthsBetween(profile.careerStart, null) ?? 0) - 1;
+const uptime = `${Math.floor(uptimeMonths / 12)} years ${uptimeMonths % 12} months`;
+const prompt = `guest@${profile.domain}`;
+---
+<div class="term" id="terminal" data-theme-name="amber" role="dialog" aria-modal="true" aria-label="Terminal" hidden>
+  <div class="bar">
+    <span class="title">{prompt}: ~</span>
+    <div class="themes" role="group" aria-label="Terminal colours">
+      <button type="button" data-term-theme="amber">amber</button>
+      <button type="button" data-term-theme="ice">ice</button>
+      <button type="button" data-term-theme="green">green</button>
+    </div>
+    <button class="close" type="button" data-close-terminal>exit (esc)</button>
+  </div>
+  <div class="screen" data-screen>
+    <div class="dim">Last login: <span data-last-login></span> on ttys001</div>
+    <div class="neo">
+<pre class="logo" aria-hidden="true">
+     _    ____
+    / \  / ___|
+   / _ \ \___ \
+  / ___ \ ___) |
+ /_/   \_\____/
+</pre>
+      <div class="kv">
+        <div><b>arjun</b>@<b>{profile.domain}</b></div>
+        <div class="dim">-----------------------</div>
+        {profile.neofetch.slice(0, 2).map(([k, v]) => <div><b>{k}</b>: {v}</div>)}
+        <div><b>Uptime</b>: {uptime} (since {formatYM(profile.careerStart)})</div>
+        {profile.neofetch.slice(2).map(([k, v]) => <div><b>{k}</b>: {v}</div>)}
+      </div>
+    </div>
+    <div class="chips" aria-label="Quick commands">
+      {["whoami", "experience", "projects", "skills", "contact", "theme", "help"].map((c) => (
+        <button type="button" data-cmd={c}>{c}</button>
+      ))}
+    </div>
+    <div data-log aria-live="polite"></div>
+    <label class="line">
+      <span><span class="ok">{prompt}</span>:<span class="hi">~</span>$</span>
+      <input data-input autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type help, Tab completes" />
+    </label>
+  </div>
+</div>
+<script type="application/json" id="terminal-data" set:html={JSON.stringify(data)} />
+
+<style>
+  .term {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    background: var(--t-bg);
+    color: var(--t-fg);
+    font-family: var(--term);
+    font-size: 14px;
+    line-height: 1.55;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  .term[hidden] { display: none; }
+  .term[data-theme-name="amber"] { --t-bg: #15110b; --t-fg: #f2b25c; --t-dim: #9b7442; --t-hi: #ffd9a0; --t-ok: #c9d47a; --t-edge: #3a2c18; --t-glow: 0 0 6px rgba(242,160,60,.35); --t-scan: rgba(0,0,0,.22); }
+  .term[data-theme-name="ice"]   { --t-bg: #0b1220; --t-fg: #b9d3f2; --t-dim: #5d7597; --t-hi: #eef6ff; --t-ok: #7fe0c4; --t-edge: #1d2a40; --t-glow: 0 0 5px rgba(120,180,255,.28); --t-scan: rgba(0,0,0,.18); }
+  .term[data-theme-name="green"] { --t-bg: #020a04; --t-fg: #3cff7a; --t-dim: #1d8a42; --t-hi: #c2ffd4; --t-ok: #e4ff6e; --t-edge: #0f3a1c; --t-glow: 0 0 7px rgba(60,255,122,.45); --t-scan: rgba(0,0,0,.3); }
+
+  .bar { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--t-edge); font-size: 12px; color: var(--t-dim); }
+  .title { margin-right: auto; }
+  .themes { display: flex; gap: 6px; }
+  .bar button { all: unset; cursor: pointer; font-size: 11px; padding: 2px 8px; border-radius: 3px; border: 1px solid var(--t-edge); color: var(--t-dim); }
+  .bar button:hover, .bar button[aria-pressed="true"] { border-color: var(--t-fg); color: var(--t-fg); }
+  .bar .close { color: var(--t-fg); }
+  .bar button:focus-visible, .chips button:focus-visible { outline: 2px solid var(--t-hi); outline-offset: 2px; }
+
+  .screen {
+    flex: 1;
+    overflow: auto;
+    padding: 20px 22px 30px;
+    text-shadow: var(--t-glow);
+    background-image: repeating-linear-gradient(to bottom, transparent 0 2px, var(--t-scan) 2px 3px);
+    background-attachment: local;
+  }
+  .screen > * { max-width: 900px; }
+  .term :global(.dim) { color: var(--t-dim); }
+  .term :global(.hi) { color: var(--t-hi); }
+  .term :global(.ok) { color: var(--t-ok); }
+  pre { margin: 0; font: inherit; white-space: pre; }
+  .neo { display: flex; gap: 28px; flex-wrap: wrap; margin: 10px 0 16px; }
+  .logo { color: var(--t-hi); }
+  .kv div { white-space: pre-wrap; }
+  .kv b { color: var(--t-hi); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; }
+  .chips button { all: unset; cursor: pointer; border: 1px solid var(--t-edge); padding: 2px 10px; border-radius: 3px; font-size: 13px; }
+  .chips button:hover { background: var(--t-fg); color: var(--t-bg); text-shadow: none; }
+  .line { display: flex; gap: 8px; align-items: baseline; }
+  input { all: unset; flex: 1; min-width: 0; color: var(--t-hi); caret-color: var(--t-hi); }
+  input::placeholder { color: var(--t-dim); opacity: 0.7; }
+  .term :global(.block) { margin-bottom: 12px; }
+  .term :global(.out) { white-space: pre-wrap; word-break: break-word; }
+  .term :global(.out a) { color: var(--t-hi); border-color: var(--t-dim); }
+  @media (max-width: 600px) {
+    .term { font-size: 12.5px; }
+    .screen { padding: 14px; }
+    .title { display: none; }
+  }
+</style>
+
+<script>
+  import { mountTerminal } from "../scripts/terminal";
+  mountTerminal();
+</script>

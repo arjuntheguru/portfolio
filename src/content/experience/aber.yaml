@@ -1,0 +1,14 @@
+org: Aberystwyth University
+role: Demonstrator
+where: Aberystwyth, Wales
+start: "2022"
+end: "2023"
+highlights:
+  - "Demonstrated for four undergraduate modules: object-oriented programming, web development, information security and foundation programming."
+tags: [Teaching]
+commit:
+  order: 3
+  parents: [5c0d7aa]
+  hash: b2e8f10
+  message: "teach: demonstrator, four CS modules"
+  lane: 1

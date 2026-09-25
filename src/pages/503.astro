@@ -1,0 +1,83 @@
+---
+// The site's nginx serves this for its own 5xx errors (nginx/site.conf). Everything is
+// inline, with no web fonts or /_astro/ files, so it works even when other files fail.
+import Shell from "../layouts/Shell.astro";
+import { profile } from "../data/profile";
+---
+<Shell title="503 · Back in a moment" noindex>
+  <div class="page">
+    <nav class="top"><a href="/">{profile.domain}</a><span>HTTP 503</span></nav>
+    <main class="down">
+      <div>
+        <div class="code">503 · service unavailable</div>
+        <h1>Back in a moment</h1>
+      </div>
+      <p>The site is restarting, usually after an update. This normally takes under a minute. This page checks again by itself and reloads when the site is back.</p>
+      <pre class="log" id="log" aria-live="polite"></pre>
+      <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+      <div class="actions">
+        <button class="btn" type="button" id="retry">Retry now</button>
+      </div>
+    </main>
+  </div>
+</Shell>
+
+<style>
+  .top { display: flex; justify-content: space-between; padding-block: 18px; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+  .top a { border: 0; color: var(--ink); font-weight: 500; padding-block: 12px; margin-block: -12px; }
+  .down { border-top: 2px solid var(--rule); padding-block: 44px; display: flex; flex-direction: column; gap: 22px; }
+  .down > * { max-width: 760px; }
+  .code { font-family: var(--mono); font-size: 12px; color: var(--bad); }
+  h1 { margin: 6px 0 0; font-family: var(--mono); font-size: clamp(30px, 5vw, 48px); letter-spacing: -0.035em; line-height: 1.05; }
+  p { margin: 0; color: var(--muted); max-width: 56ch; font-size: 17px; }
+  .log { margin: 0; font-family: var(--mono); font-size: 12px; line-height: 1.9; background: var(--bg2); border-radius: 6px; padding: 12px 14px; overflow-x: auto; white-space: pre; min-height: 5.7em; }
+  .log :global(.e) { color: var(--bad); }
+  .log :global(.w) { color: var(--hash); }
+  .log :global(.i) { color: var(--good); }
+  .log :global(.t) { color: var(--faint); }
+  .meter { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; max-width: 360px; }
+  .meter i { display: block; height: 100%; width: 0; background: var(--ink); transition: width 1s linear; }
+  .actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn { font: inherit; font-family: var(--mono); font-size: 12px; padding: 9px 14px; border-radius: 6px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); cursor: pointer; }
+</style>
+
+<script is:inline>
+  (function () {
+    var INTERVAL = 15;
+    var log = document.getElementById("log");
+    var meter = document.getElementById("meter");
+    var attempt = 1, left = INTERVAL, timer;
+
+    function line(level, msg) {
+      var cls = { ERROR: "e", WARN: "w", INFO: "i" }[level];
+      var t = new Date().toTimeString().slice(0, 8);
+      var row = document.createElement("span");
+      row.innerHTML = '<span class="t">' + t + '</span>  <span class="' + cls + '">' + (level + "  ").slice(0, 5) + "</span>  " + msg + "\n";
+      log.appendChild(row);
+    }
+    function check() {
+      clearInterval(timer);
+      line("INFO", "checking " + location.host + " (attempt " + attempt + ")");
+      fetch(location.pathname + location.search, { method: "HEAD", cache: "no-store" })
+        .then(function (r) {
+          if (r.ok) { line("INFO", "site is back, reloading"); location.reload(); }
+          else { wait("still unavailable (" + r.status + ")"); }
+        })
+        .catch(function () { wait("no response"); });
+    }
+    function wait(reason) {
+      attempt++;
+      line("WARN", reason + ", next check in " + INTERVAL + "s");
+      left = INTERVAL;
+      meter.style.width = "0%";
+      timer = setInterval(function () {
+        left--;
+        meter.style.width = ((INTERVAL - left) / INTERVAL) * 100 + "%";
+        if (left <= 0) check();
+      }, 1000);
+    }
+    document.getElementById("retry").addEventListener("click", check);
+    line("ERROR", "upstream unavailable: " + location.host + location.pathname);
+    wait("site is restarting");
+  })();
+</script>

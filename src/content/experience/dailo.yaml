@@ -1,0 +1,16 @@
+org: Dailo Technologies
+role: Software Engineer
+where: Kathmandu, Nepal
+start: 2021-02
+end: 2022-09
+highlights:
+  - Architected a scalable .NET system using Clean Architecture, improving maintainability and performance.
+  - Led a team of five developers as principal .NET backend engineer, delivering key milestones in an agile process.
+  - Defined operational specifications with stakeholders to keep requirements tied to business goals.
+tags: [.NET, C#, Clean Architecture, Team lead]
+commit:
+  order: 5
+  parents: [0a6d3be]
+  hash: 19fa6c4
+  message: "feat: lead .NET backend at Dailo"
+  lane: 0

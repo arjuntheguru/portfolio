@@ -1,0 +1,14 @@
+org: BT Group
+role: Software Engineer (industrial placement)
+where: Belfast, Northern Ireland
+start: 2023-09
+end: 2024-08
+tags: [Java, Spring Boot, AWS]
+commit:
+  order: 2
+  hash: 7a3d9e1
+  message: "feat: industrial placement at BT Group"
+  lane: 1
+  parents: [b2e8f10] # the placement year is part of the MSc branch
+  refs:
+    - { label: msc/aberystwyth, kind: branch }

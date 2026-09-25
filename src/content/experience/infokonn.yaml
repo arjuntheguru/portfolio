@@ -1,0 +1,16 @@
+org: InfoKoNN
+role: Associate Software Engineer
+where: Kathmandu, Nepal
+start: 2018-08
+end: 2020-02
+highlights:
+  - Worked with clients to identify software needs and refine requirements.
+  - Designed and built full stack web applications with .NET MVC.
+tags: [.NET MVC, SQL]
+commit:
+  order: 7
+  hash: 3f81d07
+  message: "init: first engineering role"
+  lane: 0
+  refs:
+    - { label: root, kind: branch }

@@ -1,0 +1,68 @@
+---
+import ThemeLamp from "./ThemeLamp.astro";
+import { profile } from "../data/profile";
+
+interface Props {
+  /** On the homepage the terminal opens in place; elsewhere the button links to it. */
+  terminalHref?: string;
+  sections?: boolean;
+}
+const { terminalHref, sections = true } = Astro.props;
+---
+<nav class="top" aria-label="Main">
+  <a class="home" href="/">{profile.domain}</a>
+  <ThemeLamp />
+  {sections && (
+    <div class="links">
+      <a href="/#experience">experience</a>
+      <a href="/#projects">projects</a>
+      <a href="/#skills">skills</a>
+      <a href="/#contact">contact</a>
+    </div>
+  )}
+  {terminalHref
+    ? <a class="termbtn" href={terminalHref} aria-label="Open the terminal">&gt;_<span class="word"> terminal</span></a>
+    : <button class="termbtn" type="button" data-open-terminal aria-label="Open the terminal">&gt;_<span class="word"> terminal</span> <kbd>`</kbd></button>}
+</nav>
+
+
+<style>
+  .top { display: flex; align-items: center; gap: 18px; padding-block: 18px; font-family: var(--mono); font-size: 12px; }
+  .home { font-weight: 500; border: 0; padding-block: 12px; margin-block: -12px; } /* bigger tap area, same layout */
+  .top { position: relative; }
+  .top > :global(.mount) { margin-right: auto; }
+
+  /* The lamp hangs in the empty margin left of the content when the screen is wide enough
+     to have one (content is 1040px plus room for the lamp), and beside the logo otherwise. */
+  @media (min-width: 1200px) {
+    .top > :global(.mount) { position: absolute; top: 50%; left: -60px; margin: 0; }
+    .home { margin-right: auto; }
+  }
+  .links { display: flex; gap: 18px; }
+  .links a { border: 0; color: var(--muted); }
+  .links a:hover { color: var(--ink); }
+  .termbtn {
+    all: unset;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 12px;
+    border: 1px solid var(--ink);
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .termbtn:hover { background: var(--ink); color: var(--bg); }
+  .termbtn:focus-visible { outline: 2px solid var(--lane1); outline-offset: 3px; }
+  .termbtn kbd { font-size: 10px; border-color: currentColor; opacity: 0.6; padding: 0 4px; }
+  /* The smallest phones (320px): tighter spacing and just the >_ prompt on the button. */
+  @media (max-width: 359px) {
+    .top { gap: 10px; }
+    .word { display: none; }
+  }
+  @media (max-width: 720px) {
+    .links { display: none; }
+    .termbtn kbd { display: none; }
+  }
+</style>

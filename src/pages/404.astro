@@ -1,0 +1,97 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+
+// Pages people might be looking for, with the words that should lead to them.
+const routes = [
+  { href: "/", keys: ["home", "index", "about", "me"] },
+  { href: "/#experience", keys: ["experience", "work", "jobs", "cv", "resume", "career"] },
+  { href: "/#projects", keys: ["projects", "blog", "portfolio", "transio", "drac"] },
+  { href: "/#skills", keys: ["skills", "stack", "tech"] },
+  { href: "/#education", keys: ["education", "msc", "university", "uni"] },
+  { href: "/#contact", keys: ["contact", "email", "hire"] },
+  { href: "/#terminal", keys: ["terminal", "shell", "console", "cli"] },
+];
+---
+<Base title="404 · Page not found" noindex>
+  <div class="page">
+    <Nav terminalHref="/#terminal" sections={false} />
+    <main class="nf">
+      <div>
+        <pre class="cmd">$ git checkout <span data-path>/this-page</span>
+<span class="err">error: pathspec '<span data-path>/this-page</span>' did not match any file(s) known to git</span></pre>
+        <h1>404</h1>
+        <p class="lede">This page doesn't exist. The link might be old, or there may be a typo in the address.</p>
+        <p class="dym" data-dym hidden>did you mean <a href="/" data-suggest>/</a> ?</p>
+        <div class="actions">
+          <a class="btn primary" href="/">git checkout main</a>
+          <a class="btn" href="/#terminal">open terminal</a>
+        </div>
+      </div>
+      <svg class="graph" viewBox="0 0 240 260" fill="none" aria-hidden="true">
+        <path d="M110 0 V260" class="main" />
+        <circle cx="110" cy="40" r="9" class="commit" />
+        <circle cx="110" cy="130" r="9" class="commit" />
+        <circle cx="110" cy="220" r="9" class="commit" />
+        <path d="M110 130 C110 110 190 110 190 80 V62" class="lost" />
+        <path d="M180 34 L200 54 M200 34 L180 54" class="cross" />
+        <text x="94" y="44" text-anchor="end">HEAD → main</text>
+      </svg>
+    </main>
+  </div>
+  <script type="application/json" id="routes" set:html={JSON.stringify(routes)} />
+</Base>
+
+<style>
+  .nf { display: grid; grid-template-columns: 1fr 240px; gap: 48px; align-items: center; padding-block: 48px; margin-top: 40px; border-top: 2px solid var(--rule); }
+  .cmd { margin: 0 0 22px; font-family: var(--mono); font-size: 12.5px; line-height: 1.8; color: var(--muted); white-space: pre-wrap; word-break: break-word; }
+  .err { color: var(--bad); }
+  h1 { margin: 0; font-family: var(--mono); font-size: clamp(80px, 14vw, 150px); line-height: 0.9; letter-spacing: -0.06em; font-weight: 700; }
+  .lede { margin: 18px 0 16px; font-size: 19px; max-width: 40ch; }
+  .dym { margin: 0 0 22px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { font-family: var(--mono); font-size: 12px; padding: 9px 14px; border-radius: 6px; border: 1px solid var(--ink); }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.primary:hover { opacity: 0.88; }
+  .graph { width: 100%; height: auto; }
+  .main { stroke: var(--lane0); stroke-width: 3; }
+  .commit { fill: var(--bg); stroke: var(--lane0); stroke-width: 3; }
+  .lost { stroke: var(--lane1); stroke-width: 3; stroke-dasharray: 6 7; }
+  .cross { stroke: var(--lane1); stroke-width: 3; stroke-linecap: round; }
+  text { font-family: var(--mono); font-size: 10px; fill: var(--faint); }
+  @media (max-width: 720px) {
+    .nf { grid-template-columns: 1fr; gap: 8px; padding-top: 28px; }
+    .graph { order: -1; max-width: 150px; }
+  }
+</style>
+
+<script>
+  type Route = { href: string; keys: string[] };
+  const routes: Route[] = JSON.parse(document.getElementById("routes")!.textContent!);
+  const path = decodeURIComponent(location.pathname);
+  document.querySelectorAll("[data-path]").forEach((el) => (el.textContent = path));
+
+  function distance(a: string, b: string) {
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++)
+      for (let j = 1; j <= b.length; j++)
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+
+  // Suggest the closest page by its first path segment; stay quiet when nothing is close.
+  const word = path.toLowerCase().split("/").filter(Boolean)[0]?.replace(/\.html?$/, "") ?? "";
+  let best: Route | null = null;
+  let bestScore = Infinity;
+  for (const r of routes) for (const k of r.keys) {
+    const score = distance(word, k);
+    if (score < bestScore) { bestScore = score; best = r; }
+  }
+  if (best && word && bestScore <= Math.max(1, Math.floor(word.length / 3))) {
+    const a = document.querySelector<HTMLAnchorElement>("[data-suggest]")!;
+    a.href = best.href;
+    a.textContent = best.href;
+    document.querySelector<HTMLElement>("[data-dym]")!.hidden = false;
+  }
+</script>

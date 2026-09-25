@@ -1,0 +1,18 @@
+---
+import "@fontsource/martian-mono/400.css";
+import "@fontsource/martian-mono/500.css";
+import "@fontsource/martian-mono/700.css";
+import "@fontsource/karla/400.css";
+import "@fontsource/karla/400-italic.css";
+import "@fontsource/karla/500.css";
+import "@fontsource/karla/700.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/700.css";
+import Shell from "./Shell.astro";
+
+type Props = { title: string; description?: string; noindex?: boolean };
+---
+<Shell {...Astro.props}>
+  <slot name="head" slot="head" />
+  <slot />
+</Shell>

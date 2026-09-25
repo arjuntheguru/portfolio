@@ -1,0 +1,29 @@
+# MicroK8s NGINX ingress (class "public"). There is no Traefik on this cluster.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: personal-site-ingress
+  namespace: personal-site
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    # No custom-http-errors: the site serves its own 404.html (with a real 404 status) and
+    # 503.html. If the site has no ready pods, the cluster's default backend answers
+    # (k8s/cluster/error-pages.yml).
+spec:
+  ingressClassName: public
+  tls:
+    - hosts:
+        - arjunsubedi.com
+      secretName: arjunsubedi-com-tls
+  rules:
+    - host: arjunsubedi.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: personal-site-service
+                port:
+                  number: 80

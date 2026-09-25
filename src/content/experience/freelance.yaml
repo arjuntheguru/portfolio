@@ -1,0 +1,14 @@
+org: Freelance
+role: Full Stack .NET Core Developer
+where: Kathmandu, Nepal
+start: 2020-03
+end: 2021-01
+highlights:
+  - Turned client business requirements into technical specifications, then built and shipped the applications.
+tags: [.NET Core, Full stack]
+commit:
+  order: 6
+  parents: [3f81d07]
+  hash: 0a6d3be
+  message: "feat: go freelance"
+  lane: 0
