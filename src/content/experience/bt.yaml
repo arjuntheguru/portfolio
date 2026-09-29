@@ -4,10 +4,10 @@ where: Belfast, Northern Ireland
 start: 2023-09
 end: null
 highlights:
-  - Designed and built Java microservices to TMF API specifications, running cloud-native on AWS.
-  - "Delivered a data-centre closure: migrated 3.2 billion records across 275 Informix tables into 10 PostgreSQL databases on Amazon RDS in under three weeks."
+  - Built Java microservices to TM Forum (TMF) API specifications, running on AWS.
+  - "Worked on a data-centre closure: migrated 3.2 billion records across 275 Informix tables into 10 PostgreSQL databases on Amazon RDS."
   - Added OpenTelemetry to a shared analytics client library, tracing HTTP, SQS, SNS and Kafka calls, propagating context across services and exporting to Dynatrace.
-  - Automated the move of 40+ services across AWS accounts with CI/CD pipelines and bash.
+  - Automated the move of more than 40 services across AWS accounts with CI/CD pipelines and bash.
 tags: [Java, Spring Boot, AWS, Kafka, PostgreSQL, OpenTelemetry]
 commit:
   order: 1

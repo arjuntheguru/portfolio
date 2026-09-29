@@ -5,7 +5,7 @@ start: 2018-08
 end: 2020-02
 highlights:
   - Worked with clients to identify software needs and refine requirements.
-  - Designed and built full stack web applications with .NET MVC.
+  - Built full stack web applications with .NET MVC.
 tags: [.NET MVC, SQL]
 commit:
   order: 5

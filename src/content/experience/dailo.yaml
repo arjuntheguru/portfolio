@@ -4,9 +4,9 @@ where: Kathmandu, Nepal
 start: 2021-02
 end: 2022-09
 highlights:
-  - Architected a scalable .NET system using Clean Architecture, improving maintainability and performance.
-  - Led a team of five developers as principal .NET backend engineer, delivering key milestones in an agile process.
-  - Defined operational specifications with stakeholders to keep requirements tied to business goals.
+  - Designed the .NET backend around Clean Architecture.
+  - Led a team of five backend developers, working in agile sprints.
+  - Wrote specifications with stakeholders so the work matched what the business needed.
 tags: [.NET, C#, Clean Architecture, Team lead]
 commit:
   order: 3

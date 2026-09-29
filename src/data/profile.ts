@@ -4,7 +4,7 @@ export const profile = {
   employer: "BT Group",
   location: "Belfast, Northern Ireland",
   domain: "arjunsubedi.com",
-  bio: "I build backend systems: Java and .NET microservices on AWS, large data migrations, and the tracing that shows what's happening in production. Eight years in, from Kathmandu to Belfast.",
+  bio: "I work on backend systems: Java and .NET services on AWS, data migrations, and tracing for production services. I started in Kathmandu in 2018 and now work in Belfast.",
   // Used for "years of experience" and terminal uptime.
   careerStart: "2018-08",
   email: "arjunsubedi@live.com",
