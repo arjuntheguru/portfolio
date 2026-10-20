@@ -22,9 +22,12 @@ spec:
       labels:
         app: personal-site
     spec:
+      # The image is a private ghcr.io package; ghcr-pull is created from ~/.ghcr-pull-token on the server.
+      imagePullSecrets:
+        - name: ghcr-pull
       containers:
         - name: portfolio
-          image: arjuntheguru/portfolio:latest
+          image: ghcr.io/arjuntheguru/portfolio:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80

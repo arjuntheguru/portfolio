@@ -34,10 +34,19 @@ npm run build     # static output in dist/
 The image serves the site on port 80 (`nginx/site.conf`).
 
 ```sh
-docker build -t arjuntheguru/portfolio:latest .
-docker push arjuntheguru/portfolio:latest
+docker build -t ghcr.io/arjuntheguru/portfolio:latest .
+gh auth token | docker login ghcr.io -u arjuntheguru --password-stdin
+docker push ghcr.io/arjuntheguru/portfolio:latest
 kubectl apply -f k8s/
 kubectl -n personal-site rollout restart deploy/personal-site-deployment
+```
+
+### Registry
+
+The image is a private ghcr.io package. Each namespace needs the `ghcr-pull` secret, created on the server with:
+
+```sh
+kubectl create secret docker-registry ghcr-pull -n personal-site --docker-server=ghcr.io   --docker-username=arjuntheguru --docker-password="$(cat ~/.ghcr-pull-token)" --dry-run=client -o yaml | kubectl apply -f -
 ```
 
 The cluster is MicroK8s with the NGINX ingress controller (class `public`). The site answers its own 404s and 5xx errors. If it has no ready pods at all, the cluster's default backend answers.
